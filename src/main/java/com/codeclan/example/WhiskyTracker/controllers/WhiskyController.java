@@ -14,25 +14,25 @@ public class WhiskyController {
     @Autowired
     WhiskyRepository whiskyRepository;
 
-//    @GetMapping(value = "/whiskies")
-//    public ResponseEntity getAllWhiskies(){
-//        return new ResponseEntity(whiskyRepository.findAll(), HttpStatus.OK);
-//    }
-
     @GetMapping(value = "/whiskies")
+    public ResponseEntity getAllWhiskies(){
+        return new ResponseEntity(whiskyRepository.findAll(), HttpStatus.OK);
+    } //http://localhost:8080/whiskies
+
+    @GetMapping(value = "/whiskies/year")
     public ResponseEntity getWhiskiesByYear(@RequestParam(name = "year", required = false) int year){
         return new ResponseEntity(whiskyRepository.findByYear(year), HttpStatus.OK);
-    } //http://localhost:8080/whiskies?year=12
+    } //http://localhost:8080/whiskies/year?year=12
 
     @GetMapping(value = "/whiskies/distillery")
     public ResponseEntity getWhiskiesByDistillery(@RequestParam(name = "distilleryId", required = false) Long distilleryId){
         return new ResponseEntity(whiskyRepository.findByDistilleryId(distilleryId), HttpStatus.OK);
     } //http://localhost:8080/whiskies/distillery?distilleryId=2
 
-    @GetMapping(value = "/whiskies/distilleries")
+    @GetMapping(value = "/whiskies/year/distillery")
     public ResponseEntity getWhiskiesByAgeAndDistillery(
             @RequestParam(name="age", required = false) int age,
             @RequestParam(name="distilleryId", required = false) Long distilleryId){
         return new ResponseEntity(whiskyRepository.findByAgeAndDistilleryId(age, distilleryId), HttpStatus.OK);
-    } //http://localhost:8080/whiskies/distilleries?age=2018&distilleryId=1
+    } //http://localhost:8080/whiskies/year/distillery?age=2018&distilleryId=1
 }
